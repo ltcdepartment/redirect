@@ -1,0 +1,75 @@
+<body onload="Main();">
+<h1>direct</h1>
+<script>
+
+
+	
+	function Main() {
+		var sUrl = request("url");
+		if(sUrl == 'TEST'){
+			document.location.href="https://google.com";
+		}else{
+			//serials([go],bye);
+			go();
+			setTimeout(() => {
+				//window.close();
+			},500);
+		}
+		
+	}
+	var iStat = 0;
+	var iOK = 0;
+	function go(check) {
+		var sUrl = request("url");
+		
+		document.location.href=sUrl;
+    	check('A');
+		console.log('go');
+		//alert("想要提示的文字內容");
+	}
+	function bye() {
+		//window.close();
+		setTimeout(() => {
+			window.close();
+			console.log('bye');
+		},500);
+	}
+	
+	
+	
+	function serials(tasks, callback) {
+	  var step = tasks.length;
+	  var result = [];
+
+	  // 檢查的邏輯寫在這裡
+	  function check(r) {  
+	    result.push(r);
+	    if( result.length === step ){
+	      callback();  
+	    }
+	  }
+
+	  tasks.forEach(function(f) {
+	    f(check);  
+	  });
+	}
+	
+    
+
+
+function request(paras) {
+    var url = location.href;
+    var paraString = url.substring(url.indexOf("?") + 1, url.length).split("&");
+    var paraObj = {}
+    for (i = 0; j = paraString[i]; i++) {
+        paraObj[j.substring(0, j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=") + 1, j.length);
+    }
+    var returnValue = paraObj[paras.toLowerCase()];
+    if (typeof(returnValue) == "undefined") {
+        return "";
+    } else {
+        return returnValue;
+    }
+}
+</script>
+</body>
